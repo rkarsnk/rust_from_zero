@@ -1,0 +1,57 @@
+{
+    // Name of the dev container
+    "name": "Rust Dev Container",
+
+    // Specify the Dockerfile to use as the base
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    // Forward local ports to the container
+    "forwardPorts": [3000, 8080],
+
+    // Mount the source code into the container
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "workspaceFolder": "/workspace",
+
+    // Features to install in the container
+    "features": {
+        "rust": {
+            "version": "stable",
+            "components": [
+                "rust-analyzer",
+                "cargo",
+                "clippy",
+                "rustfmt"
+            ]
+        },
+        "git": {
+            "version": "latest"
+        }
+    },
+
+    // Extensions to install in VS Code
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shellIntegration.enabled": true,
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash",
+                        "args": ["--login"]
+                    }
+                },
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "editor.codeActionsOnSaveTimeout": 1000,
+                "editor.suggestOnTriggerCharacters": true,
+                "editor.suggestSelection": "first"
+            },
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "ms-vscode.cpptools",
+                "vadimcn.vscode-lldb"
+            ]
+        }
+    }
+}
